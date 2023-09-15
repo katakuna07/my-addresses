@@ -4,6 +4,8 @@ using System.Text;
 using my_addresss.Business.Services;
 using my_addresss.Business.Services.Interfaces;
 using my_addresss.Controllers;
+using my_addresss.Helpers;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +16,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// JWT Authentication
+var configuration = builder.Configuration;
+
+builder.Services.AddDbContext<DatabaseContext>(options =>
+{
+    options.UseNpgsql(configuration.GetConnectionString("POSTGRES"));
+});
+
+#region JWT Authentication
+
 builder.Services.AddAuthentication(opt => {
     opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -33,9 +43,15 @@ builder.Services.AddAuthentication(opt => {
         };
     });
 
-// DI
+#endregion
+
+#region DI
+
 builder.Services.AddScoped<IAddressService, AddressService>();
 builder.Services.AddScoped<IUserInterface, UserService>();
+// builder.Services.AddScoped<IUserInterface, DatabaseContext>();
+
+#endregion
 
 var app = builder.Build();
 

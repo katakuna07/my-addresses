@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace my_addresss.Domain.Models
 {
 	public class Address
@@ -12,5 +14,10 @@ namespace my_addresss.Domain.Models
 		public string neighborhood { get; set; }
 		public string street { get; set; }
 		public string service { get; set; }
+
+        // User
+        [NotMapped]
+        public User user { get; set; }
+		public Guid idUser { get; set; }
     }
 }
