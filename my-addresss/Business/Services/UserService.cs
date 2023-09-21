@@ -1,26 +1,32 @@
 ﻿using System;
 using my_addresss.Business.Services.Interfaces;
 using my_addresss.Domain.Models;
+using my_addresss.Infra.Interfaces;
 
 namespace my_addresss.Business.Services
 {
-	public class UserService : IUserInterface
+	public class UserService : IUserService
 	{
-		public UserService() { }
+        private IUserRepository _userRepository;
+
+		public UserService(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
 
         public Task<bool> CreateUser(User user)
         {
-            throw new NotImplementedException();
+            return _userRepository.CreateUser(user);
         }
 
-        public Task<User> GetUser()
+        public Task<User> GetUser(string userLogin)
         {
-            throw new NotImplementedException();
+            return _userRepository.GetUser(userLogin);
         }
 
         public Task<bool> UpdateUser(User user)
         {
-            throw new NotImplementedException();
+            return _userRepository.UpdateUser(user);
         }
     }
 }

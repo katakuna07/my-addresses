@@ -29,6 +29,9 @@
     <None Remove="Business\Services\" />
     <None Remove="Business\Services\Interfaces\" />
     <None Remove="Helpers\" />
+    <None Remove="Infra\" />
+    <None Remove="Infra\Repositories\" />
+    <None Remove="Infra\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Domain\" />
@@ -37,5 +40,8 @@
     <Folder Include="Business\Services\" />
     <Folder Include="Business\Services\Interfaces\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Infra\" />
+    <Folder Include="Infra\Repositories\" />
+    <Folder Include="Infra\Interfaces\" />
   </ItemGroup>
 </Project>

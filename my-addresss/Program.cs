@@ -6,6 +6,8 @@ using my_addresss.Business.Services.Interfaces;
 using my_addresss.Controllers;
 using my_addresss.Helpers;
 using Microsoft.EntityFrameworkCore;
+using my_addresss.Infra.Interfaces;
+using my_addresss.Infra.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,8 +50,8 @@ builder.Services.AddAuthentication(opt => {
 #region DI
 
 builder.Services.AddScoped<IAddressService, AddressService>();
-builder.Services.AddScoped<IUserInterface, UserService>();
-// builder.Services.AddScoped<IUserInterface, DatabaseContext>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 #endregion
 

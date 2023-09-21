@@ -13,29 +13,29 @@ namespace my_addresss.Controllers
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly IUserInterface userInterface;
+        private readonly IUserService _userService;
 
-        public UserController(IUserInterface _userService)
+        public UserController(IUserService userService)
         {
-            userInterface = _userService;
+            _userService = userService;
         }
 
-        [HttpGet(Name = "User"), Authorize]
-        public Task<User> GetUser()
+        [HttpGet(Name = "User")]
+        public Task<User> GetUser(string userLogin)
         {
-            return userInterface.GetUser();
+            return _userService.GetUser(userLogin);
         }
 
-        [HttpPost(Name = "User"), Authorize]
+        [HttpPost(Name = "User")]
         public Task<bool> CreateUser(User user)
         {
-            return userInterface.CreateUser(user);
+            return _userService.CreateUser(user);
         }
 
-        [HttpPut(Name = "User"), Authorize]
+        [HttpPut(Name = "User")]
         public Task<bool> UpdateUser(User user)
         {
-            return userInterface.UpdateUser(user);
+            return _userService.UpdateUser(user);
         }
     }
 }
